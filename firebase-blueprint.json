@@ -1,0 +1,80 @@
+{
+  "entities": {
+    "project": {
+      "title": "Project",
+      "description": "An IT project with its AI-generated timeline.",
+      "type": "object",
+      "properties": {
+        "ownerId": {
+          "type": "string",
+          "description": "The UID of the user who owns this project",
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "idea": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "timeline": {
+          "type": "object",
+          "description": "The generated project timeline"
+        },
+        "completedTasks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxLength": 1000,
+          "description": "List of task IDs that are completed"
+        }
+      },
+      "required": ["ownerId", "createdAt", "idea", "timeline", "completedTasks"]
+    },
+    "issue": {
+      "title": "Issue",
+      "description": "An issue identified for a specific project.",
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "The ID of the parent project",
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "status": {
+          "type": "string",
+          "enum": ["open", "closed"]
+        }
+      },
+      "required": ["projectId", "createdAt", "title", "description", "status"]
+    }
+  },
+  "firestore": {
+    "/projects/{projectId}": {
+      "schema": {
+        "$ref": "#/entities/project"
+      },
+      "description": "Stores user projects"
+    },
+    "/projects/{projectId}/issues/{issueId}": {
+      "schema": {
+        "$ref": "#/entities/issue"
+      },
+      "description": "Stores issues for a specific project"
+    }
+  }
+}

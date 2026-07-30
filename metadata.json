@@ -1,0 +1,6 @@
+{
+  "name": "Project AI Timeline Generator",
+  "description": "An IT project management tool that automatically generates a timeline, milestones, and tasks based on a project idea.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
